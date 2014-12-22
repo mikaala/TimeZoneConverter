@@ -1,46 +1,34 @@
 package mvc;
 
-import java.io.IOException;
-import java.net.Socket;
-import java.text.ParseException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JTable;
 
 public class ZoneController {
 	
 	public ZoneController() {
 		view = new ZoneView();
 		model = new ZoneModel(view);
+		view.addHeaderMouseListener(new TableHeaderListener(view.getTable()));
 	}
 	
 	private ZoneModel model;
 	private ZoneView view;
 	
-}
-
-class CitySortListener implements ActionListener {
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	class TableHeaderListener extends MouseAdapter {
 		
-	}
-	
-}
-
-class TimeSortListener implements ActionListener {
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
+		public TableHeaderListener(JTable table) {
+			this.table = table;
+		}
 		
-	}
-	
-}
-
-class AbbrSortListener implements ActionListener {
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
+		@Override
+		public void mouseClicked(MouseEvent event) {
+			Point clickedPoint = event.getPoint();
+			int column = table.columnAtPoint(clickedPoint);
+			model.updateZones(column);
+		}
 		
+		private JTable table;
 	}
-	
 }
