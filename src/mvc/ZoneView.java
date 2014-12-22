@@ -29,9 +29,10 @@ public class ZoneView extends JFrame implements Observer {
 	@Override
 	public void update(Observable observable, Object dataUpdate) {
 		table.setModel(new TimeTable((ArrayList<Time>)dataUpdate));
-	    table.setPreferredScrollableViewportSize(new Dimension(300, 80)); 
-	    table.setFillsViewportHeight(true); 
-		scroller.getViewport().add(table);
+
+		scroller.setViewportView(table);
+	    scroller.setColumnHeaderView(table.getTableHeader());
+	    System.out.println(table.getTableHeader().toString());
 	}
 	
 	private JTable table;
