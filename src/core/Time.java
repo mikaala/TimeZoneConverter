@@ -36,14 +36,14 @@ public class Time implements Comparable<Time> {
 	public int compareTo(Time otherTime) {
 		
 		String[] thisSplitTime = time.split(":");
-		String[] otherSplitTime = time.split(":");
+		String[] otherSplitTime = otherTime.time.split(":");
 		int thisHours = Integer.parseInt(thisSplitTime[0]);
 		int otherHours = Integer.parseInt(otherSplitTime[0]);
 		
 		if(thisHours < otherHours) {
-			return 1;
-		} else if (thisHours > otherHours) {
 			return -1;
+		} else if (thisHours > otherHours) {
+			return 1;
 		}
 		return 0;
 	}

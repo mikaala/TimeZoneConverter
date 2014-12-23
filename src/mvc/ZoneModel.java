@@ -16,7 +16,7 @@ public class ZoneModel extends Observable {
 	public ZoneModel(Observer obs) {
 		addObserver(obs);
 		tableData = new ArrayList<Time>();
-		updateZones(TIME_SORT);
+		updateZones(PLACE_SORT);
 	}
 	
 	public void updateZones(int sortMethod) {
