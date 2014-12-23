@@ -17,7 +17,15 @@ public class Time implements Comparable<Time> {
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm dd.MM.yyyy");
 		format.setTimeZone(timeZone);
 		time = format.format(calendar.getTime());
-		place = timeZone.getID();
+		String tzPlace = timeZone.getID();
+		if(tzPlace.contains("GMT+")) {
+			tzPlace = new String("GMT-" + tzPlace.substring(tzPlace.lastIndexOf("+") + 1));
+		} else if(tzPlace.contains("GMT-")) {
+			tzPlace = new String("GMT+" + tzPlace.substring(tzPlace.lastIndexOf("-") + 1));
+		} else if(tzPlace.contains("US")) {
+			tzPlace = new String(tzPlace.replace("US", "America"));
+		}
+		place = tzPlace;
 	}
 	
 	public String toString() {

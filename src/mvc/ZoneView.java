@@ -21,7 +21,7 @@ public class ZoneView extends JFrame implements Observer {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		table = new JTable();
 		scroller = new JScrollPane();
-		scroller.setPreferredSize(new Dimension(512, 512));
+		scroller.setPreferredSize(new Dimension(720, 720));
 		add(scroller);
 		pack();
 		setVisible(true);

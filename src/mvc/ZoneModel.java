@@ -22,6 +22,9 @@ public class ZoneModel extends Observable {
 	public void updateZones(int sortMethod) {
 		tableData.clear();
 		for(String s : TimeZone.getAvailableIDs()) {
+			if(s.contains("System")) {
+				continue;
+			}
 			tableData.add(new Time(s));
 		}
 		if(sortMethod == TIME_SORT) {
