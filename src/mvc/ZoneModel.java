@@ -25,6 +25,16 @@ public class ZoneModel extends Observable {
 			if(s.contains("System")) {
 				continue;
 			}
+			Time newTime = new Time(s);
+			boolean duplicate = duplicateData(newTime);
+			if(duplicate) {
+				continue;
+			}
+			if(s.contains("PST")) {
+				insertCustomTime(s, "America/San Francisco");
+			} else if(s.contains("EST")) {
+				insertCustomTime(s, "America/Washington DC");
+			}
 			tableData.add(new Time(s));
 		}
 		if(sortMethod == TIME_SORT) {
@@ -34,13 +44,29 @@ public class ZoneModel extends Observable {
 
 				@Override
 				public int compare(Time t1, Time t2) {
-					return t1.getPlace().compareTo(t2.getPlace());
+					return t1.getPlace().toLowerCase().compareTo(t2.getPlace().toLowerCase());
 				}
 				
 			});
 		}
 		setChanged();
 		notifyObservers(tableData);
+	}
+	
+	public boolean duplicateData(Time newTime) {
+		for(Time t : tableData) {
+			if(newTime.equals(t)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void insertCustomTime(String s, String name) {
+		Time customTime = new Time(s, name);
+		if(!duplicateData(customTime)) {
+			tableData.add(customTime);
+		}
 	}
 	
 	private ArrayList<Time> tableData;

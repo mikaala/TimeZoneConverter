@@ -11,6 +11,10 @@ public class Time implements Comparable<Time> {
 		init(timeZoneID);
 	}
 	
+	public Time(String timeZoneID, String customName) {
+		customInit(timeZoneID, customName);
+	}
+	
 	public void init(String timeZoneID) {
 		TimeZone timeZone = TimeZone.getTimeZone(timeZoneID);
 		Calendar calendar = Calendar.getInstance(timeZone);
@@ -28,6 +32,15 @@ public class Time implements Comparable<Time> {
 			tzPlace = new String(tzPlace.replace("US", "America/US"));
 		}
 		place = tzPlace;
+	}
+	
+	public void customInit(String timeZoneID, String customName) {
+		TimeZone timeZone = TimeZone.getTimeZone(timeZoneID);
+		Calendar calendar = Calendar.getInstance(timeZone);
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+		format.setTimeZone(timeZone);
+		time = format.format(calendar.getTime());
+		place = customName;
 	}
 	
 	public String toString() {
@@ -52,6 +65,18 @@ public class Time implements Comparable<Time> {
 			return 1;
 		}
 		return 0;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Time)) {
+			return false;
+		}
+		Time other = (Time)obj;
+		if(place.equals(other.place)) {
+			return true;
+		}
+		return false;
 	}
 	
 	private String time, place;
