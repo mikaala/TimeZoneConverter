@@ -22,8 +22,10 @@ public class Time implements Comparable<Time> {
 			tzPlace = new String("GMT-" + tzPlace.substring(tzPlace.lastIndexOf("+") + 1));
 		} else if(tzPlace.contains("GMT-")) {
 			tzPlace = new String("GMT+" + tzPlace.substring(tzPlace.lastIndexOf("-") + 1));
+		} else if(tzPlace.contains("Etc/")) {
+			tzPlace = new String(tzPlace.substring(tzPlace.lastIndexOf("/") + 1));
 		} else if(tzPlace.contains("US")) {
-			tzPlace = new String(tzPlace.replace("US", "America"));
+			tzPlace = new String(tzPlace.replace("US", "America/US"));
 		}
 		place = tzPlace;
 	}
