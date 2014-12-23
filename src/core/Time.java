@@ -36,10 +36,6 @@ public class Time implements Comparable<Time> {
 		return place;
 	}
 	
-	public ArrayList<String> getAbbreviations() {
-		return altAbbreviations;
-	}
-	
 	@Override
 	public int compareTo(Time otherTime) {
 		
@@ -57,5 +53,4 @@ public class Time implements Comparable<Time> {
 	}
 	
 	private String time, place;
-	private ArrayList<String> altAbbreviations;
 }

@@ -10,9 +10,8 @@ public class TimeTable extends AbstractTableModel {
 	public TimeTable(ArrayList<Time> timeData) {
 		this.timeData = timeData;
 		columnHeaders = new ArrayList<String>();
-		columnHeaders.add(new String("Places"));
+		columnHeaders.add(new String("Place"));
 		columnHeaders.add(new String("Time"));
-		columnHeaders.add(new String("Alternative abbreviations"));
 	}
 	
 	@Override
@@ -38,8 +37,6 @@ public class TimeTable extends AbstractTableModel {
 			return getTime.getPlace();
 		case TIME_INDEX:
 			return getTime.toString();
-		case ABBR_INDEX:
-			return "ALTERNATIVE ABBR.";
 		}
 		return null;
 	}
