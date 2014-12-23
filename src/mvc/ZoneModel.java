@@ -32,8 +32,19 @@ public class ZoneModel extends Observable {
 			}
 			if(s.contains("PST")) {
 				insertCustomTime(s, "America/San Francisco");
+				insertCustomTime(s, "America/Las Vegas");
+				insertCustomTime(s, "America/San Diego");
 			} else if(s.contains("EST")) {
 				insertCustomTime(s, "America/Washington DC");
+				insertCustomTime(s, "America/Philadelphia");
+				insertCustomTime(s, "America/Boston");
+				insertCustomTime(s, "America/Atlanta");
+			} else if(s.contains("CST")) {
+				insertCustomTime(s, "America/Houston");
+				insertCustomTime(s, "America/Dallas");
+				insertCustomTime(s, "America/Austin");
+			} else if(s.contains("Auckland")) {
+				insertCustomTime(s, "Pacific/Wellington");
 			}
 			tableData.add(new Time(s));
 		}
@@ -67,6 +78,15 @@ public class ZoneModel extends Observable {
 		if(!duplicateData(customTime)) {
 			tableData.add(customTime);
 		}
+	}
+	
+	public Time findTime(String searchTerm) {
+		for(Time t : tableData) {
+			if(t.getPlace().toLowerCase().contains(searchTerm.toLowerCase())) {
+				return t;
+			}
+		}
+		return null;
 	}
 	
 	private ArrayList<Time> tableData;
