@@ -6,8 +6,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.*;
-import javax.swing.table.JTableHeader;
-
 import core.Time;
 import core.TimeTable;
 
@@ -20,15 +18,15 @@ public class ZoneView extends JFrame implements Observer {
 		setTitle("Time Zone Converter");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280, 720);
-		setVisible(true);
 		table = new JTable();
 		scroller = new JScrollPane();
 		add(scroller);
+		setVisible(true);
 	}
 	
 	@Override
 	public void update(Observable observable, Object dataUpdate) {
-		//Creates duplicates
+		
 		table.setModel(new TimeTable((ArrayList<Time>)dataUpdate));
 
 		scroller.setViewportView(table);
