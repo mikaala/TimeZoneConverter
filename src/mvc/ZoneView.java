@@ -1,11 +1,13 @@
 package mvc;
 
+import java.awt.Dimension;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.*;
+
 import core.Time;
 import core.TimeTable;
 
@@ -17,10 +19,11 @@ public class ZoneView extends JFrame implements Observer {
 	public void InitView() {
 		setTitle("Time Zone Converter");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1280, 720);
 		table = new JTable();
 		scroller = new JScrollPane();
+		scroller.setPreferredSize(new Dimension(512, 512));
 		add(scroller);
+		pack();
 		setVisible(true);
 	}
 	
