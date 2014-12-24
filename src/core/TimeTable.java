@@ -5,6 +5,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class TimeTable extends AbstractTableModel {
 	
+	private static final long serialVersionUID = 1L;
 	public static final int PLACE_INDEX = 0, TIME_INDEX = 1, ABBR_INDEX = 2;
 	
 	public TimeTable(ArrayList<Time> timeData) {
