@@ -45,6 +45,9 @@ public class ZoneModel extends Observable {
 				insertCustomTime(s, "America/Austin");
 			} else if(s.contains("Auckland")) {
 				insertCustomTime(s, "Pacific/Wellington");
+			} else if(s.contains("Hong_Kong")) {
+				insertCustomTime(s, "Asia/Beijing/Peking");
+				insertCustomTime(s, "Asia/China/CST/China Standard Time");
 			}
 			tableData.add(new Time(s));
 		}

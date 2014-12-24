@@ -21,13 +21,15 @@ public class Time implements Comparable<Time> {
 		time = format.format(calendar.getTime());
 		String tzPlace = timeZone.getID();
 		if(tzPlace.contains("GMT+")) {
-			tzPlace = new String("GMT-" + tzPlace.substring(tzPlace.lastIndexOf("+") + 1));
+			tzPlace = "GMT-" + tzPlace.substring(tzPlace.lastIndexOf("+") + 1);
 		} else if(tzPlace.contains("GMT-")) {
-			tzPlace = new String("GMT+" + tzPlace.substring(tzPlace.lastIndexOf("-") + 1));
+			tzPlace = "GMT+" + tzPlace.substring(tzPlace.lastIndexOf("-") + 1);
 		} else if(tzPlace.contains("Etc/")) {
-			tzPlace = new String(tzPlace.substring(tzPlace.lastIndexOf("/") + 1));
+			tzPlace = tzPlace.substring(tzPlace.lastIndexOf("/") + 1);
 		} else if(tzPlace.contains("US")) {
-			tzPlace = new String(tzPlace.replace("US", "America/US"));
+			tzPlace = tzPlace.replace("US", "America/US");
+		} else if(tzPlace.contains("_")) {
+			tzPlace = tzPlace.replace("_", " ");
 		}
 		place = tzPlace;
 	}
