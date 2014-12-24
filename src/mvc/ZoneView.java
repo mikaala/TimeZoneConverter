@@ -42,6 +42,7 @@ public class ZoneView extends JFrame implements Observer {
 		setVisible(true);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable observable, Object dataUpdate) {
 		
