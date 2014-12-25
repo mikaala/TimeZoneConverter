@@ -49,6 +49,35 @@ public class ZoneModel extends Observable {
 			} else if(s.contains("Hong_Kong")) {
 				insertCustomTime(s, "Asia/Beijing/Peking");
 				insertCustomTime(s, "Asia/China/CST/China Standard Time");
+			} else if(s.contains("CET")) {
+				insertCustomTime(s, "Europe/Frankfurt");
+				insertCustomTime(s, "Europe/Munich/Munchen");
+				insertCustomTime(s, "Europe/Cologne/Koln");
+				insertCustomTime(s, "Europe/Stuttgart");
+				insertCustomTime(s, "Europe/Hamburg");
+				insertCustomTime(s, "Europe/Marseille");
+				insertCustomTime(s, "Europe/Lyon");
+				insertCustomTime(s, "Europe/Toulouse");
+				insertCustomTime(s, "Europe/Monaco");
+				insertCustomTime(s, "Europe/Milan/Milano");
+				insertCustomTime(s, "Europe/Venice/Venezia");
+				insertCustomTime(s, "Europe/Naples/Napoli");
+				insertCustomTime(s, "Europe/Turin/Torino");
+				insertCustomTime(s, "Europe/Barcelona");
+				insertCustomTime(s, "Europe/Valencia");
+				insertCustomTime(s, "Europe/Krakow");
+				//Alternative (native) names for certain large cities
+				insertCustomTime(s, "Europe/Praha");
+				insertCustomTime(s, "Europe/Roma");
+				insertCustomTime(s, "Europe/Wien");
+			} else if(s.contains("UTC")) {
+				insertCustomTime(s, "Europe/Birmingham");
+				insertCustomTime(s, "Europe/Leeds");
+				insertCustomTime(s, "Europe/Glasgow");
+				insertCustomTime(s, "Europe/Manchester");
+				insertCustomTime(s, "Europe/Sheffield");
+				insertCustomTime(s, "Europe/Liverpool");
+				insertCustomTime(s, "Europe/Edinburgh");
 			}
 			tableData.add(new Time(s));
 		}
