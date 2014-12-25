@@ -16,6 +16,7 @@ public class ZoneModel extends Observable {
 	public ZoneModel(Observer obs) {
 		addObserver(obs);
 		tableData = new ArrayList<Time>();
+		searchData = new ArrayList<Time>();
 		updateZones(PLACE_SORT);
 	}
 	
@@ -67,6 +68,29 @@ public class ZoneModel extends Observable {
 		notifyObservers(tableData);
 	}
 	
+	public void searchZones(String searchTerm, int sortMethod) {
+		searchData.clear();
+		for(Time t : tableData) {
+			if(t.getPlace().toLowerCase().contains(searchTerm.toLowerCase())) {
+				searchData.add(t);
+			}
+		}
+		if(sortMethod == TIME_SORT) {
+			Collections.sort(searchData);
+		} else {
+			Collections.sort(searchData, new Comparator<Time>() {
+
+				@Override
+				public int compare(Time t1, Time t2) {
+					return t1.getPlace().toLowerCase().compareTo(t2.getPlace().toLowerCase());
+				}
+				
+			});
+		}
+		setChanged();
+		notifyObservers(searchData);
+	}
+	
 	public boolean duplicateData(Time newTime) {
 		for(Time t : tableData) {
 			if(newTime.equals(t)) {
@@ -83,14 +107,6 @@ public class ZoneModel extends Observable {
 		}
 	}
 	
-	public Time findTime(String searchTerm) {
-		for(Time t : tableData) {
-			if(t.getPlace().toLowerCase().contains(searchTerm.toLowerCase())) {
-				return t;
-			}
-		}
-		return null;
-	}
-	
 	private ArrayList<Time> tableData;
+	private ArrayList<Time> searchData;
 }

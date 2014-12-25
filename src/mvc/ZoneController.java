@@ -17,7 +17,7 @@ public class ZoneController {
 		view = new ZoneView();
 		model = new ZoneModel(view);
 		view.addHeaderMouseListener(new TableHeaderListener(view.getTable()));
-		view.addSearchListener(new SearchListener(view.getSearchField(), view.getAnswerField()));
+		view.addSearchListener(new SearchListener(view.getSearchField()));
 	}
 	
 	private ZoneModel model;
@@ -41,19 +41,15 @@ public class ZoneController {
 	
 	class SearchListener implements ActionListener {
 		
-		public SearchListener(JTextField searchField, JTextField answerField) {
+		public SearchListener(JTextField searchField) {
 			this.searchField = searchField;
-			this.answerField = answerField;
 		}
 		
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			Time answer = model.findTime(searchField.getText());
-			if(answer != null) {
-				answerField.setText(answer.getPlace() + " " + answer);
-			}
+			model.searchZones(searchField.getText(), 0);
 		}
 		
-		private JTextField searchField, answerField;
+		private JTextField searchField;
 	}
 }
