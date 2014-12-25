@@ -1,5 +1,8 @@
 package mvc;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -15,7 +18,6 @@ import core.TimeTable;
 public class ZoneView extends JFrame implements Observer {
 
 	private static final long serialVersionUID = 1L;
-	public static final int searchWidth = 144, searchHeight = 20, windowWidth = 720;
 	
 	public ZoneView() {
 		InitView();
@@ -23,22 +25,21 @@ public class ZoneView extends JFrame implements Observer {
 	public void InitView() {
 		setTitle("Time Zone Converter");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(null);
-		setSize(windowWidth, windowWidth + searchHeight);
+		setLayout(new BorderLayout());
+		optionPanel = new JPanel(new FlowLayout());
 		table = new JTable();
 		scroller = new JScrollPane();
-		scroller.setBounds(0, searchHeight, windowWidth, windowWidth);
+		scroller.setPreferredSize(new Dimension(512, 512));
 		searchField = new JTextField();
-		searchField.setBounds(0, 0, searchWidth, searchHeight);
+		searchField.setPreferredSize(new Dimension(256, 32));
 		search = new JButton("SEARCH");
-		search.setBounds(searchWidth, 0, searchWidth, searchHeight);
 		all = new JButton("SHOW ALL");
-		all.setBounds(searchWidth << 1, 0, (searchWidth * 3), searchHeight);
-		add(searchField);
-		add(search);
-		add(all);
-		add(scroller);
-		//pack();
+		optionPanel.add(searchField);
+		optionPanel.add(search);
+		optionPanel.add(all);
+		add(optionPanel, BorderLayout.NORTH);
+		add(scroller, BorderLayout.CENTER);
+		pack();
 		setVisible(true);
 	}
 	
@@ -85,6 +86,7 @@ public class ZoneView extends JFrame implements Observer {
 	}
 	
 	private JTable table;
+	private JPanel optionPanel;
 	private JScrollPane scroller;
 	private JTextField searchField;
 	private JButton search, all;
