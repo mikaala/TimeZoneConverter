@@ -10,7 +10,10 @@ import java.awt.event.MouseEvent;
 
 public class ZoneController {
 	
+	public final int DEFAULT_MODE = 0, SEARCH_MODE = 1;
+	
 	public ZoneController() {
+		currentMode = DEFAULT_MODE;
 		view = new ZoneView();
 		model = new ZoneModel(view);
 		view.addHeaderMouseListener(new TableHeaderListener());
@@ -21,13 +24,18 @@ public class ZoneController {
 	
 	private ZoneModel model;
 	private ZoneView view;
+	private int currentMode;
 	
 	class TableHeaderListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent event) {
 			Point clickedPoint = event.getPoint();
 			int column = view.getTable().columnAtPoint(clickedPoint);
-			model.updateZones(column);
+			if(currentMode == DEFAULT_MODE) {
+				model.updateZones(column);
+			} else {
+				model.searchZones(view.getSearchField().getText(), column);
+			}
 		}
 	}
 	
@@ -35,15 +43,17 @@ public class ZoneController {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			model.searchZones(view.getSearchField().getText(), 0);
+			currentMode = SEARCH_MODE;
+			model.searchZones(view.getSearchField().getText(), model.PLACE_SORT);
 		}
 	}
 	
 	class AllListener implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			model.updateZones(0);
+		public void actionPerformed(ActionEvent e) {
+			currentMode = DEFAULT_MODE;
+			model.updateZones(model.PLACE_SORT);
 		}
 	}
 	

@@ -66,10 +66,27 @@ public class ZoneModel extends Observable {
 				insertCustomTime(s, "Europe/Barcelona");
 				insertCustomTime(s, "Europe/Valencia");
 				insertCustomTime(s, "Europe/Krakow");
+				insertCustomTime(s, "Europe/Bern");
 				//Alternative (native) names for certain large cities
 				insertCustomTime(s, "Europe/Praha");
 				insertCustomTime(s, "Europe/Roma");
 				insertCustomTime(s, "Europe/Wien");
+				//Certain central countries in Europe
+				insertCustomTime(s, "Germany");
+				insertCustomTime(s, "Spain");
+				insertCustomTime(s, "Italy");
+				insertCustomTime(s, "Denmark");
+				insertCustomTime(s, "France");
+				insertCustomTime(s, "Netherlands/Holland");
+				insertCustomTime(s, "Belgium");
+				insertCustomTime(s, "Norway");
+				insertCustomTime(s, "Sweden");
+				insertCustomTime(s, "Czech Republic");
+				insertCustomTime(s, "Slovakia");
+				insertCustomTime(s, "Austria");
+				insertCustomTime(s, "Hungary");
+				insertCustomTime(s, "Slovenia");
+				insertCustomTime(s, "Switzerland");
 			} else if(s.contains("UTC")) {
 				insertCustomTime(s, "Europe/Birmingham");
 				insertCustomTime(s, "Europe/Leeds");
@@ -78,6 +95,9 @@ public class ZoneModel extends Observable {
 				insertCustomTime(s, "Europe/Sheffield");
 				insertCustomTime(s, "Europe/Liverpool");
 				insertCustomTime(s, "Europe/Edinburgh");
+			} else if(s.contains("Moscow")) {
+				insertCustomTime(s, "Europe/MSK/Moscow Standard Time");
+				insertCustomTime(s, "Europe/Saint Petersburg/St. Petersburg");
 			}
 			tableData.add(new Time(s));
 		}
