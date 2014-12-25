@@ -3,53 +3,65 @@ package mvc;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JTable;
-import javax.swing.JTextField;
-
-import core.Time;
 
 public class ZoneController {
 	
 	public ZoneController() {
 		view = new ZoneView();
 		model = new ZoneModel(view);
-		view.addHeaderMouseListener(new TableHeaderListener(view.getTable()));
-		view.addSearchListener(new SearchListener(view.getSearchField()));
+		view.addHeaderMouseListener(new TableHeaderListener());
+		view.addSearchListener(new SearchListener());
+		view.addKeyboardListener(new KeyboardListener());
+		view.addAllListener(new AllListener());
 	}
 	
 	private ZoneModel model;
 	private ZoneView view;
 	
 	class TableHeaderListener extends MouseAdapter {
-		
-		public TableHeaderListener(JTable table) {
-			this.table = table;
-		}
-		
 		@Override
 		public void mouseClicked(MouseEvent event) {
 			Point clickedPoint = event.getPoint();
-			int column = table.columnAtPoint(clickedPoint);
+			int column = view.getTable().columnAtPoint(clickedPoint);
 			model.updateZones(column);
 		}
-		
-		private JTable table;
 	}
 	
 	class SearchListener implements ActionListener {
-		
-		public SearchListener(JTextField searchField) {
-			this.searchField = searchField;
-		}
-		
+
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			model.searchZones(searchField.getText(), 0);
+			model.searchZones(view.getSearchField().getText(), 0);
 		}
+	}
+	
+	class AllListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			model.updateZones(0);
+		}
+	}
+	
+	class KeyboardListener implements KeyListener {
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				view.manualClickSearch();
+			} else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				view.manualClickAll();
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {}
 		
-		private JTextField searchField;
+		@Override
+		public void keyTyped(KeyEvent e) {}
 	}
 }

@@ -1,6 +1,7 @@
 package mvc;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -31,12 +32,11 @@ public class ZoneView extends JFrame implements Observer {
 		searchField.setBounds(0, 0, searchWidth, searchHeight);
 		search = new JButton("SEARCH");
 		search.setBounds(searchWidth, 0, searchWidth, searchHeight);
-		answerField = new JTextField("ANSWER WILL APPEAR HERE");
-		answerField.setBounds(searchWidth << 1, 0, (windowWidth - searchWidth << 1), searchHeight);
-		answerField.setEditable(false);
+		all = new JButton("SHOW ALL");
+		all.setBounds(searchWidth << 1, 0, (searchWidth * 3), searchHeight);
 		add(searchField);
 		add(search);
-		add(answerField);
+		add(all);
 		add(scroller);
 		//pack();
 		setVisible(true);
@@ -60,6 +60,14 @@ public class ZoneView extends JFrame implements Observer {
 		search.addActionListener(listener);
 	}
 	
+	public void addAllListener(ActionListener listener) {
+		all.addActionListener(listener);
+	}
+	
+	public void addKeyboardListener(KeyListener listener) {
+		searchField.addKeyListener(listener);
+	}
+	
 	public JTable getTable() {
 		return table;
 	}
@@ -68,12 +76,16 @@ public class ZoneView extends JFrame implements Observer {
 		return searchField;
 	}
 	
-	public JTextField getAnswerField() {
-		return answerField;
+	public void manualClickSearch() {
+		search.doClick();
+	}
+	
+	public void manualClickAll() {
+		all.doClick();
 	}
 	
 	private JTable table;
 	private JScrollPane scroller;
-	private JTextField searchField, answerField;
-	private JButton search;
+	private JTextField searchField;
+	private JButton search, all;
 }
