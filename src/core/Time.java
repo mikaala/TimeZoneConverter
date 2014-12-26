@@ -9,6 +9,7 @@ public class Time implements Comparable<Time> {
 		init(timeZoneID);
 	}
 	
+	//Initializing a time with a time zone but using a name different from the default
 	public Time(String timeZoneID, String customName) {
 		customInit(timeZoneID, customName);
 	}
@@ -16,19 +17,24 @@ public class Time implements Comparable<Time> {
 	public void init(String timeZoneID) {
 		TimeZone timeZone = TimeZone.getTimeZone(timeZoneID);
 		Calendar calendar = Calendar.getInstance(timeZone);
-		SimpleDateFormat format = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+		//24-hour clock and dd-mm-yyyy (most European countries use these)
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm dd-MM-yyyy");
 		format.setTimeZone(timeZone);
 		time = format.format(calendar.getTime());
 		String tzPlace = timeZone.getID();
+		//Miscellaneous fixes etc. to improve logic and readability when using the program
 		if(tzPlace.contains("GMT+")) {
 			tzPlace = tzPlace.replace("+", "-");
 		} else if(tzPlace.contains("GMT-")) {
 			tzPlace = tzPlace.replace("-", "+");
-		} else if(tzPlace.contains("Etc/")) {
+		} 
+		if(tzPlace.contains("Etc/")) {
 			tzPlace = tzPlace.substring(tzPlace.lastIndexOf("/") + 1);
-		} else if(tzPlace.contains("US")) {
+		}
+		if(tzPlace.contains("US")) {
 			tzPlace = tzPlace.replace("US", "America/US");
-		} else if(tzPlace.contains("_")) {
+		}
+		if(tzPlace.contains("_")) {
 			tzPlace = tzPlace.replace("_", " ");
 		}
 		place = tzPlace;
@@ -51,6 +57,7 @@ public class Time implements Comparable<Time> {
 		return place;
 	}
 	
+	//Compares time. Does not care about minutes as minute differences are very rare between time zones.
 	@Override
 	public int compareTo(Time otherTime) {
 		
@@ -67,6 +74,7 @@ public class Time implements Comparable<Time> {
 		return 0;
 	}
 	
+	//Checks if the name (place) is the same
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof Time)) {

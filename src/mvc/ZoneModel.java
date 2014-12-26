@@ -13,6 +13,7 @@ public class ZoneModel extends Observable {
 	
 	public final int PLACE_SORT = 0, TIME_SORT = 1;
 	
+	//The View observes the Model
 	public ZoneModel(Observer obs) {
 		addObserver(obs);
 		tableData = new ArrayList<Time>();
@@ -31,6 +32,7 @@ public class ZoneModel extends Observable {
 			if(duplicate) {
 				continue;
 			}
+			//Adding certain large cities to the list
 			if(s.contains("PST")) {
 				insertCustomTime(s, "America/San Francisco");
 				insertCustomTime(s, "America/Las Vegas");
@@ -101,6 +103,7 @@ public class ZoneModel extends Observable {
 			}
 			tableData.add(new Time(s));
 		}
+		//Sort by either time or place. Place comparator implemented here
 		if(sortMethod == TIME_SORT) {
 			Collections.sort(tableData);
 		} else {
@@ -113,6 +116,7 @@ public class ZoneModel extends Observable {
 				
 			});
 		}
+		//Notifies the View about the new data
 		setChanged();
 		notifyObservers(tableData);
 	}
@@ -136,10 +140,12 @@ public class ZoneModel extends Observable {
 				
 			});
 		}
+		//Notifies the View about the new data
 		setChanged();
 		notifyObservers(searchData);
 	}
 	
+	//Check whether a Time is already on the list
 	public boolean duplicateData(Time newTime) {
 		for(Time t : tableData) {
 			if(newTime.equals(t)) {
@@ -149,6 +155,7 @@ public class ZoneModel extends Observable {
 		return false;
 	}
 	
+	//Reduces duplicate code when inserting custom Times
 	public void insertCustomTime(String s, String name) {
 		Time customTime = new Time(s, name);
 		if(!duplicateData(customTime)) {

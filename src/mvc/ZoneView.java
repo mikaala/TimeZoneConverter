@@ -26,6 +26,7 @@ public class ZoneView extends JFrame implements Observer {
 		setTitle("Time Zone Converter");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
+		//A FlowLayout panel that helps organize the look of the program
 		optionPanel = new JPanel(new FlowLayout());
 		table = new JTable();
 		scroller = new JScrollPane();
@@ -43,6 +44,7 @@ public class ZoneView extends JFrame implements Observer {
 		setVisible(true);
 	}
 	
+	//When the View gets new data it updates the table
 	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable observable, Object dataUpdate) {
@@ -77,6 +79,7 @@ public class ZoneView extends JFrame implements Observer {
 		return searchField;
 	}
 	
+	//Manual click functions so that the Controller can call them at will
 	public void manualClickSearch() {
 		search.doClick();
 	}

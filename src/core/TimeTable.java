@@ -3,10 +3,11 @@ package core;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
+//An AbstractTableModel implementation with very little outside the necessities implemented
 public class TimeTable extends AbstractTableModel {
 	
 	private static final long serialVersionUID = 1L;
-	public static final int PLACE_INDEX = 0, TIME_INDEX = 1, ABBR_INDEX = 2;
+	public static final int PLACE_INDEX = 0, TIME_INDEX = 1;
 	
 	public TimeTable(ArrayList<Time> timeData) {
 		this.timeData = timeData;

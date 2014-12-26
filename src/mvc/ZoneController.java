@@ -10,12 +10,15 @@ import java.awt.event.MouseEvent;
 
 public class ZoneController {
 	
+	//Modes help with sorting the right data
 	public final int DEFAULT_MODE = 0, SEARCH_MODE = 1;
 	
 	public ZoneController() {
 		currentMode = DEFAULT_MODE;
+		//Initializes both the View and the Model. The View observes the Model.
 		view = new ZoneView();
 		model = new ZoneModel(view);
+		//adds the necessary listeners to the View
 		view.addHeaderMouseListener(new TableHeaderListener());
 		view.addSearchListener(new SearchListener());
 		view.addKeyboardListener(new KeyboardListener());
@@ -26,6 +29,7 @@ public class ZoneController {
 	private ZoneView view;
 	private int currentMode;
 	
+	//Listens to clicks on the headers of the table (for sorting purposes)
 	class TableHeaderListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent event) {
@@ -39,6 +43,7 @@ public class ZoneController {
 		}
 	}
 	
+	//Listens to clicks on the "Search" button
 	class SearchListener implements ActionListener {
 
 		@Override
@@ -48,6 +53,7 @@ public class ZoneController {
 		}
 	}
 	
+	//Listens to clicks on the "Show all" button
 	class AllListener implements ActionListener {
 
 		@Override
