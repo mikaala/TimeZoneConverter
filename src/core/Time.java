@@ -43,7 +43,7 @@ public class Time implements Comparable<Time> {
 	public void customInit(String timeZoneID, String customName) {
 		TimeZone timeZone = TimeZone.getTimeZone(timeZoneID);
 		Calendar calendar = Calendar.getInstance(timeZone);
-		SimpleDateFormat format = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm dd-MM-yyyy");
 		format.setTimeZone(timeZone);
 		time = format.format(calendar.getTime());
 		place = customName;
